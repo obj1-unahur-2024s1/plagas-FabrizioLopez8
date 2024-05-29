@@ -1,0 +1,29 @@
+import barrios.*
+import elementos.*
+
+describe "test de Barrios" {
+	const hogar1 = new Hogar(nivelDeMugre=10 , comfort=30)
+	const huerta1 = new Huerta(produccion=500)
+	const huerta2 = new Huerta(produccion=0)
+	const firulais = new Mascota(salud=50)
+	const michi = new Mascota(salud=350)	
+	const barrioCopado = new Barrio()
+	const hogar2 = new Hogar(nivelDeMugre=5, comfort= 32)
+	
+	method initialaze() {
+		barrioCopado.agregarElementos([hogar1,huerta1,firulais])
+	}
+	
+	test "el barrioCopado no es copado" {
+		assert.notThat(barrioCopado.esCopado())
+	}
+	test "ahora si el barrioCopado es copado" {
+		barrioCopado.agregarElementos([michi, hogar2])
+		assert.that(barrioCopado.esCopado())
+	}
+	test "ahora como estan empatados no es copado" {
+		barrioCopado.agregarElementos([michi, hogar2])
+		barrioCopado.agregarElementos([huerta2])
+		assert.that(barrioCopado.esCopado())
+	}
+}
